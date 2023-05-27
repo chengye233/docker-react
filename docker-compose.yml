@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    # 使用这个目录的Dockerfile来构建镜像
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      # 排除掉本机当前目录的node_modules不与容器内的node_modules关联
+      - /app/node_modules
+      - .:/app
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      # 排除掉本机当前目录的node_modules不与容器内的node_modules关联
+      - /app/node_modules
+      - .:/app
+    command: [ "npm", "run", "test" ]
