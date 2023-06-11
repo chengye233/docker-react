@@ -67,7 +67,7 @@ jobs:
       -
         name: Test
         run: |
-          docker run --rm ghcr.io/${{ env.REPO }}-dev:${{ github.sha }} npm test
+          docker run --rm -e CI=true ghcr.io/${{ env.REPO }}-dev:${{ github.sha }} npm test
           
       - name: Build and push container image to registry
         uses: docker/build-push-action@v2
