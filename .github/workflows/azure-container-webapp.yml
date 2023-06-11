@@ -64,6 +64,10 @@ jobs:
           push: true
           tags: ghcr.io/${{ env.REPO }}:${{ github.sha }}
           file: ./Dockerfile
+      -
+        name: Test
+        run: |
+          docker run --rm ghcr.io/${{ env.REPO }}:${{ github.sha }}
 
   deploy:
     permissions:
